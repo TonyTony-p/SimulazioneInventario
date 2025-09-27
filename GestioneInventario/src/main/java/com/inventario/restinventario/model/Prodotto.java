@@ -1,8 +1,12 @@
 package com.inventario.restinventario.model;
 
-import jakarta.persistence.*; 
+import jakarta.persistence.*;
+
+import java.time.LocalDateTime;
 import java.util.Objects;
 
+import org.springframework.data.annotation.CreatedDate;
+import org.springframework.data.annotation.LastModifiedDate;
 import org.springframework.data.jpa.domain.support.AuditingEntityListener;
 
 @Entity
@@ -23,8 +27,28 @@ public class Prodotto  {
     @JoinColumn(name = "fornitore_id") // crea la FK "fornitore_id" nella tabella "prodotto" quindi e una chiave di relazione
     private Fornitore fornitore;
 
+    
+    @CreatedDate
+    @Column(nullable = false, updatable = false)
+    private LocalDateTime createdAt;
+
+    @LastModifiedDate
+    @Column(nullable = false)
+    private LocalDateTime updatedAt;
+
+    @PrePersist
+    protected void onCreate() {
+        this.createdAt = this.updatedAt = LocalDateTime.now();
+    }
+
+    @PreUpdate
+    protected void onUpdate() {
+        this.updatedAt = LocalDateTime.now();
+    }
    
-    public Prodotto() {
+ 
+
+	public Prodotto() {
     }
 
     public Prodotto(String nome, int quantita, Fornitore fornitore) {
@@ -65,6 +89,22 @@ public class Prodotto  {
     public void setFornitore(Fornitore fornitore) {
         this.fornitore = fornitore;
     }
+    
+    public LocalDateTime getCreatedAt() {
+ 		return createdAt;
+ 	}
+
+ 	public void setCreatedAt(LocalDateTime createdAt) {
+ 		this.createdAt = createdAt;
+ 	}
+
+ 	public LocalDateTime getUpdatedAt() {
+ 		return updatedAt;
+ 	}
+
+ 	public void setUpdatedAt(LocalDateTime updatedAt) {
+ 		this.updatedAt = updatedAt;
+ 	}
 
     
     @Override

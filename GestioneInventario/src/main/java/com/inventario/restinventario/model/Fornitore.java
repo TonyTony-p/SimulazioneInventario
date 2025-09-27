@@ -44,7 +44,7 @@ public class Fornitore  {
         this.telefono = telefono;
     }
 
-    // Getter e Setter
+   
     public Long getId() {
         return id;
     }
