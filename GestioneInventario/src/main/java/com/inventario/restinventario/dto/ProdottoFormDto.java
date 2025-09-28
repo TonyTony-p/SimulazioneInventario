@@ -14,8 +14,12 @@ public class ProdottoFormDto {
     @NotNull(message = "La quantità è obbligatoria")
     @Min(value = 0, message = "La quantità non può essere negativa")
     private Integer quantita;
+    
+    @NotBlank(message  = "La descrizione di un prodotto è  obbligatoria")
+    private String descrizione;
 
-    @NotNull(message = "Il fornitore è obbligatorio")
+
+	@NotNull(message = "Il fornitore è obbligatorio")
     private Long fornitoreId; 
 
     
@@ -42,6 +46,13 @@ public class ProdottoFormDto {
 
     public void setQuantita(Integer quantita) {
         this.quantita = quantita;
+    }
+    public String getDescrizione() {
+    	return descrizione;
+    }
+    
+    public void setDescrizione(String descrizione) {
+    	this.descrizione = descrizione;
     }
 
     public Long getFornitoreId() {

@@ -3,6 +3,7 @@ package com.inventario.restinventario.service;
 import org.springframework.stereotype.Service;
 
 import com.inventario.restinventario.dto.FornitoreDto;
+import com.inventario.restinventario.dto.ProdottoCreateResponseDto;
 import com.inventario.restinventario.dto.ProdottoDto;
 import com.inventario.restinventario.dto.ProdottoFormDto;
 import com.inventario.restinventario.model.Fornitore;
@@ -33,31 +34,35 @@ public class ProdottoService {
 	    dto.setEmail(fornitore.getEmail());
 	    return dto;
 	}
+	
+	
 
 
-	public ProdottoDto create(ProdottoFormDto dto) {
+	public ProdottoCreateResponseDto create(ProdottoFormDto dto) {
 	    if (dto.getId() != null) {
 	        throw new IllegalArgumentException("id non valido per la creazione");
 	    }
 
 	    // Recupero del fornitore tramite ID
-	    Fornitore fornitore = null;
-	    if (dto.getFornitoreId() != null) {
-	        fornitore = fornitoreRepo.findById(dto.getFornitoreId())
-	            .orElseThrow(() -> new IllegalArgumentException("Fornitore non trovato"));
+	    if (dto.getFornitoreId() == null) {
+	        throw new IllegalArgumentException("ID fornitore obbligatorio");
 	    }
 
+	    Fornitore fornitore = fornitoreRepo.findById(dto.getFornitoreId())
+	        .orElseThrow(() -> new IllegalArgumentException("Fornitore non trovato"));
+
+
 	    // Creazione e salvataggio del Prodotto
-	    Prodotto prodotto = new Prodotto(dto.getNome(), dto.getQuantita(), fornitore);
+	    Prodotto prodotto = new Prodotto(dto.getNome(), dto.getQuantita(),dto.getDescrizione(),fornitore);
 	    prodotto = prodottoRepo.save(prodotto);
 
 	    
-	    return new ProdottoDto(
+	    return new ProdottoCreateResponseDto(
 	        prodotto.getId(),
 	        prodotto.getNome(),
 	        prodotto.getQuantita(),
-	        toFornitoreDto(prodotto.getFornitore()) 
-	    );
+	        prodotto.getDescrizione()
+	   );
 	}
 
 	

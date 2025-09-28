@@ -22,6 +22,9 @@ public class Prodotto  {
 
     @Column(nullable = false)
     private Integer quantita;
+    
+    @Column(nullable = false, length = 150)
+    private String descrizione;
 
     @ManyToOne(optional = false) // optional=false è obbligatorio avere un fornitore
     @JoinColumn(name = "fornitore_id") // crea la FK "fornitore_id" nella tabella "prodotto" quindi e una chiave di relazione
@@ -51,14 +54,16 @@ public class Prodotto  {
 	public Prodotto() {
     }
 
-    public Prodotto(String nome, int quantita, Fornitore fornitore) {
+    public Prodotto(String nome, int quantita,String descrizione, Fornitore fornitore) {
         this.nome = nome;
         this.quantita = quantita;
         this.fornitore = fornitore;
+        this.descrizione = descrizione;
     }
 
   
-    public Long getId() {
+
+	public Long getId() {
         return id;
     }
 
@@ -80,6 +85,14 @@ public class Prodotto  {
 
     public void setQuantita(Integer quantita) {
         this.quantita = quantita;
+    }
+    
+    public String getDescrizione() {
+    	return descrizione;
+    }
+    
+    public void setDescrizione(String descrizione) {
+    	this.descrizione = descrizione;
     }
 
     public Fornitore getFornitore() {
