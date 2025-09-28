@@ -70,9 +70,10 @@ public class FornitoreDto {
 		return prodotti;
 	}
 
-	public void setCani(List<ProdottoDto> prodotti) {
-		this.prodotti = prodotti;
+	public void setProdotti(List<ProdottoDto> prodotti) {
+	    this.prodotti = prodotti;
 	}
+
 	
 	
     

@@ -1,4 +1,4 @@
-package com.inventario;
+package com.inventario.restinventario;
 
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
