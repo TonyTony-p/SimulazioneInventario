@@ -30,16 +30,6 @@ public class ProdottoService {
 		this.fornitoreRepo = fornitoreRepo;
 	}
 	
-	//Dto creato per prendere solo i campi del fornitore che reputo necessari
-	private FornitoreDto toFornitoreDto(Fornitore fornitore) {
-	    if (fornitore == null) return null;
-
-	    FornitoreDto dto = new FornitoreDto();
-	    dto.setId(fornitore.getId());        
-	    dto.setNome(fornitore.getNome());
-	    dto.setEmail(fornitore.getEmail());
-	    return dto;
-	}
 	
 	@Transactional(readOnly = true)
 	
