@@ -5,9 +5,7 @@ import org.springframework.data.domain.Pageable;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
-import com.inventario.restinventario.dto.FornitoreDto;
 import com.inventario.restinventario.dto.ProdottoCreateResponseDto;
-import com.inventario.restinventario.dto.ProdottoDto;
 import com.inventario.restinventario.dto.ProdottoFormDto;
 import com.inventario.restinventario.model.Fornitore;
 import com.inventario.restinventario.model.Prodotto;
@@ -35,7 +33,7 @@ public class ProdottoService {
 	
 	public PageResponse<ProdottoCreateResponseDto> listAll(Pageable pageable){
 		Page<Prodotto> page = prodottoRepo.findAll(pageable); 
-		Page<ProdottoCreateResponseDto> mapper = page.map(p -> new ProdottoCreateResponseDto(p.getId(),p.getNome(),p.getQuantita(),p.getDescrizione()));
+		Page<ProdottoCreateResponseDto> mapper = page.map(p -> new ProdottoCreateResponseDto(p.getId(),p.getNome(),p.getQuantita(),p.getDescrizione(),p.getFornitore() != null ? p.getFornitore().getId() : null));
 		return PageResponse.from(mapper);
 	}	
 	
@@ -64,7 +62,8 @@ public class ProdottoService {
 	        prodotto.getId(),
 	        prodotto.getNome(),
 	        prodotto.getQuantita(),
-	        prodotto.getDescrizione()
+	        prodotto.getDescrizione(),
+	        prodotto.getFornitore().getId()
 	   );
 	}
 	

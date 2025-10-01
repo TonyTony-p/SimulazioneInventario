@@ -18,13 +18,13 @@ public class FornitoreDto {
     public FornitoreDto() {
     }
 
-    public FornitoreDto(Long id, String nome, String indirizzo, String email, String telefono) {
+    public FornitoreDto(Long id, String nome, String indirizzo, String email, String telefono,List<ProdottoDto> prodotti) {
         this.id = id;
         this.nome = nome;
         this.indirizzo = indirizzo;
         this.email = email;
         this.telefono = telefono;
-        this.prodotti = null;
+        this.prodotti = prodotti;
     }
 
     public Long getId() {

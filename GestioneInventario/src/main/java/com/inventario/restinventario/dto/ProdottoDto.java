@@ -1,19 +1,25 @@
 package com.inventario.restinventario.dto;
 
+import com.fasterxml.jackson.annotation.JsonInclude;
+
+
+@JsonInclude(JsonInclude.Include.NON_NULL)
 public class ProdottoDto {
 
 	
 	private Long id;
 	private String nome;
 	private int quantita;
+	private String descrizione;
 	private FornitoreDto fornitore;
 	
 	public ProdottoDto() {}
 	
-	public ProdottoDto(Long id, String nome, int quantita, FornitoreDto fornitore) {
+	public ProdottoDto(Long id, String nome, int quantita,String descrizione, FornitoreDto fornitore) {
 		this.id = id;
 		this.nome = nome;
 		this.quantita = quantita;
+		this.descrizione = descrizione;
 		this.fornitore = fornitore;
 	}
 
@@ -39,6 +45,14 @@ public class ProdottoDto {
 
 	public void setQuantita(int quantita) {
 		this.quantita = quantita;
+	}
+	
+	public String getDescrizione() {
+		return descrizione;
+	}
+	
+	public void setDescrizione(String descrizione) {
+		this.descrizione = descrizione;
 	}
 
 	public FornitoreDto getFornitore() {
