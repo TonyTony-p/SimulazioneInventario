@@ -35,6 +35,16 @@ public class FornitoreService {
     }
 	
 	@Transactional
+	public void deleteById(Long id) {
+		if(!fornitoreRepo.existsById(id)) {
+			throw new IllegalArgumentException("Fornitore non trovato con ID: " + id);
+		}
+		
+		fornitoreRepo.deleteById(id);
+	}
+	
+	
+	@Transactional
 	public PageResponse<FornitoreDto> listAll(Pageable pageable) {
 	    Page<Fornitore> page = fornitoreRepo.findAll(pageable);
 
