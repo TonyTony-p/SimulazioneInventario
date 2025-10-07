@@ -23,6 +23,19 @@ public class DtoMapper {
 	    return dto;
 	}
 	
+	public static FornitoreDto fornitoreNoProduct(Fornitore fornitore) {
+		if (fornitore == null) return null;
+		
+		FornitoreDto dto = new FornitoreDto();
+		dto.setId(fornitore.getId());
+		dto.setNome(fornitore.getNome());
+		dto.setIndirizzo(fornitore.getIndirizzo());
+		dto.setEmail(fornitore.getEmail());
+		dto.setTelefono(fornitore.getTelefono());
+		
+		return dto;
+	}
+	
 	
 	public static ProdottoDto prodottoInFornitore(Prodotto prodotto) {
 		if(prodotto == null) return null;

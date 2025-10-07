@@ -1,5 +1,6 @@
 package com.inventario.restinventario.service;
 
+import java.util.List;
 import java.util.stream.Collectors;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -62,9 +63,16 @@ public class FornitoreService {
 		fornitoreRepo.deleteById(id);
 	}
 	
+    public List<FornitoreDto> listAll() {
+        return fornitoreRepo.findAll().stream()
+                .map(DtoMapper::fornitoreNoProduct)
+                .collect(Collectors.toList());
+    }
+	
+	
 	
 	@Transactional
-	public PageResponse<FornitoreDto> listAll(Pageable pageable) {
+	public PageResponse<FornitoreDto> listAllWithProduct(Pageable pageable) {
 	    Page<Fornitore> page = fornitoreRepo.findAll(pageable);
 
 	    Page<FornitoreDto> mapper = page.map(f -> new FornitoreDto(

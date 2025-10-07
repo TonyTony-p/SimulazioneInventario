@@ -1,5 +1,7 @@
 package com.inventario.restinventario.web;
 
+import java.util.List;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Pageable;
 import org.springframework.data.web.PageableDefault;
@@ -19,6 +21,7 @@ import com.inventario.restinventario.dto.ProdottoDto;
 
 import com.inventario.restinventario.service.FornitoreService;
 
+
 import it.studentiscuolajpa.reststudentiscuola.dto.PageResponse;
 
 @RestController
@@ -29,9 +32,14 @@ public class FornitoreController {
 	@Autowired
 	private FornitoreService fornitoreService;
 	
-	@GetMapping
-	public PageResponse<FornitoreDto> allFornitori(@PageableDefault(size = 10) Pageable pageable){
-		return fornitoreService.listAll(pageable);
+	
+    @GetMapping
+    public List<FornitoreDto> listAll() { return fornitoreService.listAll(); }
+	
+	
+	@GetMapping("/all")
+	public PageResponse<FornitoreDto> allFornitoriWithProduct(@PageableDefault(size = 10) Pageable pageable){
+		return fornitoreService.listAllWithProduct(pageable);
 	}
 	
 	@PostMapping
