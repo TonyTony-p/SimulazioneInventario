@@ -8,6 +8,8 @@ import java.util.List;
 
 public class FornitoreFormDto {
 
+	private Long id;
+	
     @NotBlank(message = "Il nome del fornitore è obbligatorio")
     @Size(max = 100, message = "Il nome del fornitore non può superare i 100 caratteri")
     private String nome;
@@ -24,16 +26,10 @@ public class FornitoreFormDto {
 
     private List<ProdottoFormDto> prodotti;
 
-    public FornitoreFormDto() {
-    }
 
-    public FornitoreFormDto(String nome, String indirizzo, String email, String telefono, List<ProdottoFormDto> prodotti) {
-        this.nome = nome;
-        this.indirizzo = indirizzo;
-        this.email = email;
-        this.telefono = telefono;
-        this.prodotti = prodotti;
-    }
+    
+    public Long getId() { return id; }
+    public void setId(Long id) { this.id = id; }
 
     public String getNome() {
         return nome;

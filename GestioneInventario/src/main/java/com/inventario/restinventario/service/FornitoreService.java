@@ -13,6 +13,7 @@ import com.inventario.restinventario.mappers.DtoMapper;
 import com.inventario.restinventario.model.Fornitore;
 import com.inventario.restinventario.repository.FornitoreRepository;
 
+
 import it.studentiscuolajpa.reststudentiscuola.dto.PageResponse;
 import jakarta.transaction.Transactional;
 
@@ -33,6 +34,24 @@ public class FornitoreService {
         f.setTelefono(form.getTelefono());
         return DtoMapper.toFornitoreDto(fornitoreRepo.save(f));
     }
+	
+	@Transactional
+	public FornitoreDto update(FornitoreFormDto form) {
+	    if (form.getId() == null)
+	        throw new RuntimeException("Id fornitore obbligatorio per update");
+
+	    Fornitore f = fornitoreRepo.findById(form.getId())
+	            .orElseThrow(() -> new RuntimeException("Fornitore non trovato"));
+
+	    
+	    f.setNome(form.getNome());
+	    f.setIndirizzo(form.getIndirizzo());
+	    f.setEmail(form.getEmail());
+	    f.setTelefono(form.getTelefono());
+
+	    return DtoMapper.toFornitoreDto(fornitoreRepo.save(f));
+	}
+
 	
 	@Transactional
 	public void deleteById(Long id) {
